@@ -1,0 +1,112 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>SCSM</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/menu">Inicio</ion-item>
+      <ion-item href="/mantenciones"> Mantenciones</ion-item>
+      <br>
+      <div style="margin: top 10px; margin-left:5%;">
+        <ion-text color="danger">Categorias Administrador</ion-text>
+      </div>
+      <ion-item href="/admin-menu">Inicio Administrador</ion-item>
+      <ion-item href="/carros">Carros</ion-item>
+      <ion-item href="/usuarios">Usuarios</ion-item>
+      <ion-item>
+        <ion-button href="/login" (click)="removeData()" color="danger">Cerrar Sesion</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>SCSM BOMBEROS DE CHILE</ion-title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <div>
+    <img src="https://i.ibb.co/BrxTdSt/A-UNO-1432452-Personalizado-1200x630.jpg" class="d-block w-100" alt="..." width="auto" height="500px">
+  </div>
+  
+  <h1 style="text-align: center; margin-top: 40px;">BIENVENIDO AL SISTEMA - SCSM Bomberos de Chile</h1>
+
+  <ion-card style= " width: auto; text-align: center; margin-left: 5%; margin-right: 5%; border-radius: 25px;">
+    <ion-card-header>
+      <ion-card-title>¿Que es SCSM?</ion-card-title>
+      <ion-card-subtitle>Tu nueva app de confianza</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      En SCSM podras ver los diferentes vehiculos de las diversas compañias <br>
+      de bomberos de la comuna de Talcahuano y controlar tanto su estado como <br>
+      las mantenciones que han recibido, en cualquier lugar que estes, tanto escritorio <br>
+      como movil.
+    </ion-card-content>
+  </ion-card>
+
+ <h2 style="text-align: center; margin-top: 5%;">Vehiculos</h2>
+  
+ <form style="margin-top: 50px;">
+  <P>FILTRAR POR ESTADO:</P>
+    <ion-select [(ngModel)]="filtro" name="estado" required="required" style="max-width: 175px; margin-left: 45%; margin-right: 50%;">
+      <ion-select-option value="Disponible"> 1- Disponible</ion-select-option>
+      <ion-select-option value="En Mantencion"> 2- En Mantencion</ion-select-option>
+      <ion-select-option value="Dañado"> 3- Dañado</ion-select-option>
+    </ion-select>
+    <ion-button color="success" type="button" (click)="filtroEstado()">filtrar</ion-button>
+ </form>
+
+ <ion-row style="margin-top: 50px; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;">
+    <ion-card *ngFor="let carros of carros; let indexArray = index">
+      <img src="{{carros.imagenCarro}}" style="width: 400px; height: 300px;" />
+      <ion-card-header>
+        <ion-item style="text-align: center;">
+          <ion-card-title style="text-transform: uppercase" >{{ carros.Patente }}</ion-card-title>
+        </ion-item>
+        <ion-item>
+          <ion-card-subtitle>Marca || {{ carros.Marca }}</ion-card-subtitle>
+        </ion-item>
+        <ion-item>
+          <ion-card-subtitle>Tipo Vehiculo || {{ carros.tipo_carro }}</ion-card-subtitle>
+        </ion-item>
+        <ion-item>
+          <ion-card-subtitle>Cuartel || {{ carros.ID_cuartel }}</ion-card-subtitle>
+        </ion-item>
+        <ion-item>
+          <ion-card-subtitle>Estado|| {{ carros.estado }}</ion-card-subtitle>
+        </ion-item>  
+        <ion-item>
+          <P>Actulizar Estado:</P>
+          <ion-select [(ngModel)]="estadoActualizado" name="estado" required="required">
+            <ion-select-option value="Disponible"> 1- Disponible</ion-select-option>
+            <ion-select-option value="En Mantencion"> 2- En Mantencion</ion-select-option>
+            <ion-select-option value="Dañado"> 3- Dañado</ion-select-option>
+        </ion-select>
+        <ion-button color="success" type="button" (click)="ActualizarEstado(carros.Patente)">Actualizar estado</ion-button>
+        </ion-item>   
+      </ion-card-header>
+    </ion-card>
+  </ion-row>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="text-align: center;"> SCSM Bomberos de Chile </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,76 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>SCSM</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/menu">Inicio</ion-item>
+      <ion-item href="/mantenciones"> Mantenciones</ion-item>
+      <ion-item href="/carros">Carros</ion-item>
+      <ion-item href="/usuarios">Usuarios</ion-item>
+      <ion-item>
+        <ion-button href="/adminlogin" (click)="removeData()" color="danger">Cerrar Sesion</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>SCSM BOMBEROS DE CHILE ADMINISTRADOR</ion-title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <h1 style="text-align: center; margin-top: 40px;">BIENVENIDO AL SISTEMA ADMINISTRADOR - SCSM Bomberos de Chile</h1>
+
+
+  <ion-row style="margin-top: 50px; margin-bottom: 5%; margin-left: 8%; margin-right: 8%;">
+
+      <div style="width: auto; height: auto;">
+        <ion-card href="/usuarios">
+          <ion-card-header color="danger">
+            <ion-card-title style="text-align: center;">Usuarios</ion-card-title>
+          </ion-card-header>
+          <img alt="usuarios" src="https://i.ibb.co/ZN3NyKp/1449475.jpg" width="500px" height="300px" />
+        </ion-card>
+      </div>
+
+      <div style="width: auto; height: auto;">
+        <ion-card href="/carros">
+          <ion-card-header color="success">
+            <ion-card-title style="text-align: center;">Vehiculos</ion-card-title>
+          </ion-card-header>
+          <img alt="vehiculos" src="https://i.ibb.co/MCXDCdy/5-Carros-Hazmat-450x280.jpg" width="500px" height="300px"/>
+        </ion-card>
+      </div>
+
+      <div style="width: auto; height: auto;">
+        <ion-card href="/mantenciones">
+          <ion-card-header color="primary">
+            <ion-card-title style="text-align: center;">Mantenciones</ion-card-title>
+          </ion-card-header>
+          <img alt="mantenciones" src="https://i.ibb.co/sVWFtzB/Importancia-de-las-mantenciones-de-autos.jpg" width="500px" height="300px"/>
+        </ion-card>      
+      </div>
+
+
+  </ion-row>
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="text-align: center;"> SCSM Bomberos de Chile </ion-title>
+  </ion-toolbar>
+</ion-footer>

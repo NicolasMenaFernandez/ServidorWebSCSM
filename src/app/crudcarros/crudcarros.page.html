@@ -1,0 +1,141 @@
+
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>SCSM</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/admin-menu">Inicio</ion-item>
+      <ion-item href="/usuarios">Usuarios</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Carros</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <form action="Guardar Vehiculo">
+
+    <ion-item>
+      <ion-label position="floating" for="Patente">Patente</ion-label>
+      <ion-input labelPlacement="stacked" [clearOnEdit]="true" placeholder="Ingrese patente con siguiente formato: xxxx-0" type="text" id="marca" [(ngModel)]="Patente" name="Patente" style="text-transform: uppercase" required="required"  maxlength="6"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label  position="floating" for="marca">Marca</ion-label>
+      <ion-input type="text" id="modelo" [(ngModel)]="Marca" name="Marca" style="text-transform: uppercase" required="required"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <P>Tipo Vehiculo</P>
+      <ion-select [(ngModel)]="tipo_carro" name="tipo_carro" required="required">
+          <ion-select-option value="Camion">Camion</ion-select-option>
+          <ion-select-option value="Camioneta">Camioneta</ion-select-option>
+          <ion-select-option value="Bicicleta">Bicicleta</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <p>Imagen Vehiculo:</p>
+      <ion-label position="floating" for="imagen"></ion-label>
+      <ion-input type="file" id="imagenCarro"  name="imagenCarro" (change)="seleccionarArchivo($event)" accept="image/*" required="required"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <P>Cuartel Asociado</P>
+      <ion-select [(ngModel)]="ID_cuartel" name="ID_cuartel" required="required">
+        <ion-select-option value="1"> 1- Gabriel Toro 175</ion-select-option>
+        <ion-select-option value="2"> 2- Av. Jorge Montt 224</ion-select-option>
+        <ion-select-option value="3"> 3- España 205</ion-select-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <P>Estado</P>
+      <ion-select [(ngModel)]="estado" name="estado" required="required">
+        <ion-select-option value="Disponible"> 1- Disponible</ion-select-option>
+        <ion-select-option value="En Mantencion"> 2- En Mantencion</ion-select-option>
+        <ion-select-option value="Dañado"> 3- Dañado</ion-select-option>
+    </ion-select>
+    </ion-item>
+
+    <div class="ion-text-center ion-margin-top">
+      <ion-button color="success" type="button" (click)="enviarPost()">Enviar</ion-button>
+
+    </div>
+
+    <div *ngIf="MensajedeError" class="ion-text-center ion-margin-top">
+      <ion-text color="danger">{{ MensajedeError }}</ion-text>
+    </div>
+
+  </form>
+  
+  <ion-item class="Titulos" style=" margin-top: 2%; margin-left: 5%; margin-right: 5%;">
+    <ion-label style="text-align: center;"> Vehiculos Registrados </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar (ionChange)="filtroVehiculos($event)" style="text-transform: uppercase" labelPlacement="stacked"  placeholder="Ingrese Patente" ></ion-searchbar>
+  </ion-item>
+
+
+  <form action="Listar vehiculos busqueda" >
+    <ion-list>
+      <ion-item *ngFor="let carros of filtroCarros">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{ carros.imagenCarro }}" style="width: 50px; height: 50px;"></ion-img>
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        <h1>Patente: <br>
+          {{carros.Patente}}</h1>
+        <p>{{ carros.Marca}}</p>
+        <p>{{ carros.tipo_carro}}</p>
+        <p>{{ carros.ID_cuartel}}</p>
+        <p>{{carros.estado}}</p>
+      </ion-label>
+      
+        
+        <ion-button color="danger"(click)="metodoDelete(carros.Patente)" >Eliminar</ion-button> 
+      </ion-item>
+    </ion-list>
+  </form>
+
+
+  <form action="Listar vehiculos">
+    <ion-list>
+      <ion-item *ngFor="let carros of carros; let indexArray = index">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{ carros.imagenCarro }}" style="width: 50px; height: 50px;"></ion-img>
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        <h1>Patente: <br>
+          {{carros.Patente}}</h1>
+        <p>{{ carros.Marca}}</p>
+        <p>{{ carros.tipo_carro}}</p>
+        <p>{{ carros.ID_cuartel}}</p>
+        <p>{{carros.estado}}</p>
+      </ion-label>
+        <ion-button color="danger"(click)="metodoDelete(carros.Patente)" >Eliminar</ion-button> 
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="text-align: center;"> SCSM Bomberos de Chile </ion-title>
+  </ion-toolbar>
+</ion-footer>

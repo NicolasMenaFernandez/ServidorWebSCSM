@@ -1,0 +1,151 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>SCSM</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/menu">Inicio</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Mantenciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-searchbar (ionChange)="filtroMantencion($event)" style="text-transform: uppercase" labelPlacement="stacked"  placeholder="Ingrese patente" ></ion-searchbar>
+
+  
+  <ion-list>
+    <ion-col sizeMd="4" offsetMd="4">
+      <ion-list class="custom-list">
+        <ion-item *ngFor="let Mantenciones of filtroMantenciones" class="custom-item">
+          <ion-thumbnail slot="start">
+            <ion-img src="{{Mantenciones.evidencia}}" style="width: 50px; height: 50px;"></ion-img>
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h1>{{Mantenciones.Patente}}</h1>
+            <p> ID Mantencion: {{Mantenciones.ID_mantencion}}</p>
+            <p>{{Mantenciones.Desc_mantencion}}</p>
+            <h3>{{Mantenciones.Fecha_mantencion | date: 'dd-MM-yyyy'}}</h3>
+          </ion-label>
+
+          <div>
+            <ion-button (click)="mostrarImagen(Mantenciones.evidencia)">Evidencia</ion-button>
+          </div>
+
+          <div>
+            <ion-button (click)="metodoDelete(Mantenciones.ID_mantencion)">Eliminar</ion-button>
+          </div>
+
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-list>
+
+  <ion-list>
+      <ion-col sizeMd="4" offsetMd="4">
+        <ion-list class="custom-list">
+          <ion-item *ngFor="let Mantenciones of mantenciones" class="custom-item">
+            <ion-thumbnail slot="start">
+              <ion-img src="{{Mantenciones.evidencia}}" style="width: 50px; height: 50px;"></ion-img>
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap">
+            <h1>{{Mantenciones.Patente}}</h1>
+            <p> ID Mantencion: {{Mantenciones.ID_mantencion}}</p>
+            <p>{{Mantenciones.Desc_mantencion}}</p>
+            <h3>{{Mantenciones.Fecha_mantencion | date: 'dd-MM-yyyy'}}</h3>
+            </ion-label>
+
+            <div>
+              <ion-button (click)="mostrarImagen(Mantenciones.evidencia)">Evidencia</ion-button>
+            </div>
+
+            <div>
+              <ion-button (click)="metodoDelete(Mantenciones.ID_mantencion)">Eliminar</ion-button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+  </ion-list>
+
+  <div class="ion-text-center ion-margin-top">
+    <ion-button (click)="mostrarFormulario()">Registrar Mantención</ion-button>
+  </div>
+
+  <ion-card *ngIf="mostrarForm">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center ion-margin-top">Registro de Mantenciones</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <form action="Guardar Mantención">
+    
+        <ion-item>
+          <ion-label position="floating" for="Patente">Patente</ion-label>
+          <ion-input labelPlacement="stacked" [clearOnEdit]="true" placeholder="Ingrese patente con siguiente formato: xxxx-0" type="text" id="marca" [(ngModel)]="Patente" name="Patente" style="text-transform: uppercase" required="required"  maxlength="6"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label  position="floating" for="Fecha">Fecha</ion-label>
+          <ion-input required="required"  slot="end" type="date" id="modelo" [(ngModel)]="Fecha_mantencion" name="Marca"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <P>Tipo Mantencion</P>
+          <ion-select [(ngModel)]="Tipo_mantencion" name="Tipo_mantencion" required="required">
+            <ion-select-option value="Correctico"> Correctivo </ion-select-option>
+            <ion-select-option value="Preventivo"> Preventivo</ion-select-option>
+        </ion-select>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating" for="Desc_mantencion">Descripción mantención</ion-label>
+          <ion-input required="required" type="text" id="color" [(ngModel)]="Desc_mantencion" name="imagenCarro"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label position="floating" for="evidencia">evidencia</ion-label>
+          <ion-input  slot="end" type="file" id="color"  name="ID_cuartel" (change)="seleccionarArchivo($event)" accept="image/*"> </ion-input>
+        </ion-item>
+
+        <div class="ion-text-center ion-margin-top">
+          <ion-button  color="success" type="button" (click)="enviarPost()">Enviar</ion-button>
+        </div>
+
+        <div *ngIf="MensajedeError" class="ion-text-center ion-margin-top">
+          <ion-text color="danger">{{ MensajedeError }}</ion-text>
+        </div>
+    
+        
+      </form>
+
+      <div class="ion-text-right ion-margin-top">
+        <ion-button (click)="ocultarFormulario()">Cerrar</ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+  
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="text-align: center;"> SCSM Bomberos de Chile </ion-title>
+  </ion-toolbar>
+</ion-footer>

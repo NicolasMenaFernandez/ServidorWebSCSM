@@ -1,0 +1,272 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>SCSM</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item href="/admin-menu">Inicio</ion-item>
+      <ion-item href="/carros">Vehiculos</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>SCSM Usuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form action="Guardar bomberos">
+   
+    <ion-item>
+      <ion-label position="floating" for="Rut_bombero">RUT</ion-label>
+      <ion-input type="text" id="Rut_bombero" [(ngModel)]="Rut_bombero" name="Rut_bombero" style="text-transform: uppercase" required="required" aria-placeholder="12345678-9" maxlength="11"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label  position="floating" for="Nombre_bombero">Nombre</ion-label>
+      <ion-input type="text" id="Nombre_bombero" [(ngModel)]="Nombre_bombero" name="Marca" required="required"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label  position="floating" for="Apellidos_bombero">Apellidos</ion-label>
+      <ion-input type="text" id="Apellidos_bombero" [(ngModel)]="Apellidos_bombero" name="Apellidos_bombero" required="required"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <P>Rango del Bombero</P>
+      <ion-select [(ngModel)]="Rango" name="Rango" required="required">
+          <ion-select-option value="Capitan">Capitan</ion-select-option>
+          <ion-select-option value="Teniente">Teniente</ion-select-option>
+          <ion-select-option value="Bombero">Bombero</ion-select-option>
+          <ion-select-option value="Bombero en Prueba">Bombero en Prueba</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label  position="floating" for="Contrasena_bombero">Contraseña</ion-label>
+      <ion-input type="text" id="Contrasena_bombero" [(ngModel)]="Contrasena_bombero" name="Contrasena_bombero"  required="required"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <P>Cuartel Asociado</P>
+      <ion-select [(ngModel)]="ID_cuartel" name="ID_cuartel" required="required">
+        <ion-select-option value="1"> 1- Gabriel Toro 175</ion-select-option>
+        <ion-select-option value="2"> 2- Av. Jorge Montt 224</ion-select-option>
+        <ion-select-option value="3"> 3- España 205</ion-select-option>
+    </ion-select>
+    </ion-item>
+    <div class="ion-text-center ion-margin-top">
+      <ion-button color="success" type="button" (click)="metodoPost()">Enviar</ion-button>
+    </div>
+        
+
+    <div *ngIf="MensajedeError" class="ion-text-center ion-margin-top">
+      <ion-text color="danger">{{ MensajedeError }}</ion-text>
+    </div>
+
+  </form>
+
+  <ion-item class="Titulos" style=" margin-top: 2%; margin-left: 5%; margin-right: 5%;">
+    <ion-label style="text-align: center;"> BOMBEROS REGISTRADOS </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-searchbar (ionChange)="filtroUsuario($event)" style="text-transform: uppercase" labelPlacement="stacked"  placeholder="Ingrese Rut" ></ion-searchbar>
+  </ion-item>
+
+
+  <form action="Listar bomberos Busqueda">
+    <ion-list>
+      <ion-item *ngFor="let bomberos of filtroUser">
+        <ion-thumbnail slot="start">
+          <ion-img src="https://i.ibb.co/F5Fj1M6/systemusers-104569.png" style="width: 50px; height: 50px;"></ion-img>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h1> RUT: {{ bomberos.Rut_bombero }}</h1>
+          <p>{{  bomberos.Nombre_bombero }}</p>
+          <p>{{  bomberos.Apellidos_bombero }}</p>
+          <p>{{  bomberos.Rango }}</p>
+          <p>{{  bomberos.ID_cuartel }}</p>
+          <h3> Contraseña: {{ bomberos.Contrasena_bombero }}</h3>
+        </ion-label>
+          
+        <div>
+          <ion-button (click)="mostrarFormulario()">Actualizar</ion-button>
+        </div>
+
+        <ion-card *ngIf="mostrarForm">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-margin-top">Actualizar bombero</ion-card-title>
+          </ion-card-header>
+      
+          <ion-card-content>
+            
+
+            <ion-item>
+              <ion-label position="floating" for="Rut_bombero">RUT</ion-label>
+              <ion-input type="text" id="Rut_bombero" [(ngModel)]="Rut_bombero" name="Rut_bombero" style="text-transform: uppercase" required="required" aria-placeholder="12345678-9" maxlength="11"></ion-input>
+            </ion-item>
+
+            
+
+            <ion-item>
+              <ion-label  position="floating" for="Nombre_bombero">Nombre</ion-label>
+              <ion-input type="text" id="Nombre_bombero" [(ngModel)]="Nombre_bombero" name="Marca" required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label  position="floating" for="Apellidos_bombero">Apellidos</ion-label>
+              <ion-input type="text" id="Apellidos_bombero" [(ngModel)]="Apellidos_bombero" name="Apellidos_bombero" required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <P>Rango del Bombero</P>
+              <ion-select [(ngModel)]="Rango" name="Rango" required="required">
+                  <ion-select-option value="Capitan">Capitan</ion-select-option>
+                  <ion-select-option value="Teniente">Teniente</ion-select-option>
+                  <ion-select-option value="Bombero">Bombero</ion-select-option>
+                  <ion-select-option value="Bombero en Prueba">Bombero en Prueba</ion-select-option>
+              </ion-select>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label  position="floating" for="Contrasena_bombero">Contraseña</ion-label>
+              <ion-input type="text" id="Contrasena_bombero" [(ngModel)]="Contrasena_bombero" name="Contrasena_bombero"  required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <P>Cuartel Asociado</P>
+              <ion-select [(ngModel)]="ID_cuartel" name="ID_cuartel" required="required">
+                <ion-select-option value="1"> 1- Gabriel Toro 175</ion-select-option>
+                <ion-select-option value="2"> 2- Av. Jorge Montt 224</ion-select-option>
+                <ion-select-option value="3"> 3- España 205</ion-select-option>
+            </ion-select>
+            </ion-item>
+
+            <div class="ion-text-center ion-margin-top">
+              <ion-button color="primary" (click)="metodoPut(bomberos.Rut_bombero)">Actualizar Bombero</ion-button>
+            </div>
+
+
+
+      
+            <div class="ion-text-right ion-margin-top">
+              <ion-button (click)="ocultarFormulario()">Cerrar</ion-button>
+            </div>
+      
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button color="danger"(click)="metodoDelete(bomberos.Rut_bombero); recargarPagina()" >Eliminar</ion-button>
+      </ion-item> 
+    </ion-list>
+  </form>
+  
+  
+  <form action="Listar bomberos">
+    <ion-list>
+      <ion-item *ngFor="let bomberos of bombero; let indexArray = index">
+        <ion-thumbnail slot="start">
+          <ion-img src="https://i.ibb.co/F5Fj1M6/systemusers-104569.png" style="width: 50px; height: 50px;"></ion-img>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h1> RUT: {{ bomberos.Rut_bombero }}</h1>
+          <p>{{  bomberos.Nombre_bombero }}</p>
+          <p>{{  bomberos.Apellidos_bombero }}</p>
+          <p>{{  bomberos.Rango }}</p>
+          <p>{{  bomberos.ID_cuartel }}</p>
+          <h3> Contraseña: {{ bomberos.Contrasena_bombero }}</h3>
+        </ion-label>
+
+        
+
+        <div>
+          <ion-button (click)="mostrarFormulario()">Actualizar</ion-button>
+        </div>
+      
+        <ion-card *ngIf="mostrarForm">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center ion-margin-top">Actualizar bombero</ion-card-title>
+          </ion-card-header>
+      
+          <ion-card-content>
+            
+
+            <ion-item>
+              <ion-label position="floating" for="Rut_bombero">RUT</ion-label>
+              <ion-input type="text" id="Rut_bombero" [(ngModel)]="Rut_bombero" name="Rut_bombero" style="text-transform: uppercase" required="required" aria-placeholder="12345678-9" maxlength="11"></ion-input>
+            </ion-item>
+
+            
+
+            <ion-item>
+              <ion-label  position="floating" for="Nombre_bombero">Nombre</ion-label>
+              <ion-input type="text" id="Nombre_bombero" [(ngModel)]="Nombre_bombero" name="Marca" required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label  position="floating" for="Apellidos_bombero">Apellidos</ion-label>
+              <ion-input type="text" id="Apellidos_bombero" [(ngModel)]="Apellidos_bombero" name="Apellidos_bombero" required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <P>Rango del Bombero</P>
+              <ion-select [(ngModel)]="Rango" name="Rango" required="required">
+                  <ion-select-option value="Capitan">Capitan</ion-select-option>
+                  <ion-select-option value="Teniente">Teniente</ion-select-option>
+                  <ion-select-option value="Bombero">Bombero</ion-select-option>
+                  <ion-select-option value="Bombero en Prueba">Bombero en Prueba</ion-select-option>
+              </ion-select>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label  position="floating" for="Contrasena_bombero">Contraseña</ion-label>
+              <ion-input type="text" id="Contrasena_bombero" [(ngModel)]="Contrasena_bombero" name="Contrasena_bombero"  required="required"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <P>Cuartel Asociado</P>
+              <ion-select [(ngModel)]="ID_cuartel" name="ID_cuartel" required="required">
+                <ion-select-option value="1"> 1- Gabriel Toro 175</ion-select-option>
+                <ion-select-option value="2"> 2- Av. Jorge Montt 224</ion-select-option>
+                <ion-select-option value="3"> 3- España 205</ion-select-option>
+            </ion-select>
+            </ion-item>
+
+            <div class="ion-text-center ion-margin-top">
+              <ion-button color="primary" (click)="metodoPut(bomberos.Rut_bombero)">Actualizar Bombero</ion-button>
+            </div>
+
+
+
+      
+            <div class="ion-text-right ion-margin-top">
+              <ion-button (click)="ocultarFormulario()">Cerrar</ion-button>
+            </div>
+      
+          </ion-card-content>
+        </ion-card>
+        <ion-button color="danger"(click)="metodoDelete(bomberos.Rut_bombero); recargarPagina()" >Eliminar</ion-button>
+      </ion-item> 
+    </ion-list>
+  </form>
+
+  
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="text-align: center;"> SCSM Bomberos de Chile </ion-title>
+  </ion-toolbar>
+</ion-footer>
+

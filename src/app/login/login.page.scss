@@ -1,0 +1,40 @@
+ion-header{
+    margin-bottom: 10%;
+    
+}
+
+img{
+    display: block;
+    padding: 0.5rem 1rem;
+    width: auto;
+    margin: 0 auto;
+}
+
+div{
+  text-align: center;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+ion-item{
+    display: block;
+    padding: 0.5rem 1rem;
+    width: 300px;
+    margin: 0 auto;
+}
+
+ion-button{
+    display: block;
+    padding: 0.5rem 1rem;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.error-login{
+    font-size: 20px;
+    color: red;
+}
+
+.ok-login{
+    display: none;
+}

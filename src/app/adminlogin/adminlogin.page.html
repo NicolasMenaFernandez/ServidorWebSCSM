@@ -1,0 +1,39 @@
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="onLoginAdmin()">
+    <div>
+      <ion-title>SCSM - BOMBEROS DE CHILE</ion-title>
+    </div>
+    
+    <img src="https://i.ibb.co/RyKxS0N/logo-bomberos-266x300.png" alt="logo-bomberos-266x300" border="0"><img >
+    <ion-item lines="full">
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input name="Rut_bombero" id="Rut_bombero"  [(ngModel)]="Rut_encargado" type="text" placeholder="12345678-9" required="required" title="e.g 12345678-9" pattern="^[0-9]{8}-[0-9kK]$"></ion-input>
+    </ion-item>
+    
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input name="Contrasena_bombero" [(ngModel)]="Contrasena_encargado" type="password" required="required"></ion-input>
+    </ion-item>
+
+    <ion-label class="{{ getData() }}"> ERROR: RUT o Contraseña incorrectos</ion-label>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block" (click)="onLoginAdmin()">Ingresar</ion-button>
+        <ion-button href="/login" color="warning">Usuario Normal</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

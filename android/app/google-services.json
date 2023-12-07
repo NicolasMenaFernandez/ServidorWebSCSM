@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93107478773",
+    "project_id": "scsmbomberos",
+    "storage_bucket": "scsmbomberos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93107478773:android:17c1f9c2270d3ebbaa65bc",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7iFQlFlKocz32m1mVrFwcnqsL_XBepBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
